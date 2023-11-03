@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 		default: "mihussain.com",
 		template: "%s | mihussain.com",
 	},
-	description: "Software engineer at upstash.com and founder of planetfall.io",
+	description: "Software engineer at Strategic System Internation & founder of Softekton.com",
 	openGraph: {
 		title: "mihussain.com",
 		description:
-			"Software engineer at upstash.com and founder of planetfall.io",
-		url: "https://mihussain.com",
+			"Software engineer at Strategic System Internation & founder of Softekton.com",
+		url: "https://mihussain.vercel.app/",
 		siteName: "mihussain.com",
 		images: [
 			{
-				url: "https://mihussain.com/og.png",
+				url: "https://mihussain.vercel.app/og.png",
 				width: 1920,
 				height: 1080,
 			},
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 		},
 	},
 	twitter: {
-		title: "mihussain",
+		title: "irtazahussain9",
 		card: "summary_large_image",
 	},
 	icons: {
