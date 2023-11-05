@@ -44,7 +44,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 	return (
 		<header
 			ref={ref}
-			className="relative isolate overflow-hidden bg-gradient-to-tl from-black via-zinc-900 to-black"
+			className="container mx-auto relative isolate overflow-hidden pt-14 sm:pt-20"
 		>
 			<div
 				className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
@@ -109,7 +109,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 					</Link>
 				</div>
 			</div>
-			<div className="container mx-auto relative isolate overflow-hidden  py-24 sm:py-32">
+			<div className="container mx-auto relative isolate overflow-hidden py-14 sm:py-20">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
 					<div className="mx-auto max-w-2xl lg:mx-0">
 						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display">
