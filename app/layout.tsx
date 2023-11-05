@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 		siteName: "mihussain.com",
 		images: [
 			{
-				url: "https://mihussain.vercel.app/og.png",
+				url: "https://mihussain.vercel.app/",
 				width: 1920,
 				height: 1080,
 			},
