@@ -37,7 +37,9 @@ export default function Home() {
 				quantity={3000}
 			/>
 			<h1 className="z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text bg-gradient-to-l from-yellow-600 to-orange-400">
-				M. Irtaza Hussain
+				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Muhammad</span> 
+				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Irtaza</span> 
+				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Hussain</span>
 			</h1>
 
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
@@ -48,10 +50,10 @@ export default function Home() {
 				My expertise lies in 
 				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Python</span>(Django, Flask, FastAPI), 
 				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Dotnet</span>,
-				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Automation</span>,
-				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Javascript</span> Frameworks, 
+				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">Automation</span>(Bash, Docker, YAML Pipelines),
 				<br/>
-				mainly the MERN Stack, along with many other technologies, tools.
+				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">JavaScript</span> (Nodejs, React, Nextjs), 
+				<span className="bg-transparent pb-1 mx-1 border border-b-amber-400/30 border-x-transparent border-t-transparent">TypeScript</span>.
 				</h2>
 			</div>
 		</div>

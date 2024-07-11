@@ -6,16 +6,16 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
 	title: {
-		default: "mihussain.com",
-		template: "%s | mihussain.com",
+		default: "Irtaza Hussain",
+		template: "%s | irtazahussain.com",
 	},
-	description: "Software engineer at Strategic System Internation & founder of Softekton.com",
+	description: "Sr. Software engineer & founder of Softekton.com",
 	openGraph: {
-		title: "mihussain.com",
+		title: "irtazahussain.com",
 		description:
-			"Software engineer at Strategic System Internation & founder of Softekton.com",
+			"Sr. Software engineer & founder of Softekton.com",
 		url: "https://mihussain.vercel.app/",
-		siteName: "mihussain.com",
+		siteName: "irtazahussain.com",
 		images: [
 			{
 				url: "https://mihussain.vercel.app/",

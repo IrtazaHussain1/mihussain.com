@@ -13,9 +13,9 @@ const socials = [
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:mihussain.official@gmail.com",
+		href: "mailto:irtaza@irtazahussain.com",
 		label: "Email",
-		handle: "mihussain.official",
+		handle: "Irtaza Hussain",
 	},
 	{
 		icon: <Github size={20} />,

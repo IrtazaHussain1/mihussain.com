@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="https://mihussain.com"><h1 align="center">mihussain.com</h1></a>
+    <a href="https://irtazahussain.com"><h1 align="center">Irtaza Hussain</h1></a>
     
 My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=mihussain.com), [Contentlayer](https://www.contentlayer.dev/) and deployed to [Vercel](https://vercel.com/).
 
