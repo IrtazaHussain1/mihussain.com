@@ -7,18 +7,18 @@ import { Analytics } from "./components/analytics";
 export const metadata: Metadata = {
 	title: {
 		default: "Irtaza Hussain",
-		template: "%s | irtazahussain.com",
+		template: "%s | Irtaza Hussain",
 	},
 	description: "Sr. Software engineer & founder of Softekton.com",
 	openGraph: {
-		title: "irtazahussain.com",
+		title: "Irtaza Hussain",
 		description:
 			"Sr. Software engineer & founder of Softekton.com",
-		url: "https://mihussain.vercel.app/",
-		siteName: "irtazahussain.com",
+		url: "https://irtazahussain.com/",
+		siteName: "Irtaza Hussain",
 		images: [
 			{
-				url: "https://mihussain.vercel.app/",
+				url: "https://irtazahussain.com/og.png",
 				width: 1920,
 				height: 1080,
 			},
