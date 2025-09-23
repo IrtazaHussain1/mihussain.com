@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { allProjects } from "contentlayer/generated";
+import { getAllProjects, getProjectBySlug } from "../../../lib/mdx";
 import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
@@ -16,6 +16,7 @@ type Props = {
 };
 
 export async function generateStaticParams(): Promise<Props["params"][]> {
+	const allProjects = getAllProjects();
 	return allProjects
 		.filter((p) => p.published)
 		.map((p) => ({
@@ -25,7 +26,7 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
 
 export default async function PostPage({ params }: Props) {
 	const slug = params?.slug;
-	const project = allProjects.find((project) => project.slug === slug);
+	const project = getProjectBySlug(slug);
 
 	if (!project) {
 		notFound();
@@ -125,7 +126,7 @@ export default async function PostPage({ params }: Props) {
 				{/* Enhanced Article Content */}
 				<article className="glass-panel p-8 lg:p-12 mb-10">
 					<div className="prose prose-lg prose-invert max-w-none">
-						<Mdx code={project.body.code} />
+						<Mdx content={project.content} />
 					</div>
 				</article>
 

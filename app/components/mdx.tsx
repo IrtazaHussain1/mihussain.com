@@ -2,7 +2,6 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMDXComponent } from "next-contentlayer/hooks";
 
 function clsx(...args: any) {
 	return args.filter(Boolean).join(" ");
@@ -164,15 +163,15 @@ const components = {
 };
 
 interface MdxProps {
-	code: string;
+	content: string;
 }
 
-export function Mdx({ code }: MdxProps) {
-	const Component = useMDXComponent(code);
-
+export function Mdx({ content }: MdxProps) {
+	// For now, we'll render the content as HTML
+	// In a production setup, you'd want to use @mdx-js/loader or similar
 	return (
-		<div className="mdx">
-			<Component components={components} />
+		<div className="mdx prose prose-invert max-w-none">
+			<div dangerouslySetInnerHTML={{ __html: content }} />
 		</div>
 	);
 }

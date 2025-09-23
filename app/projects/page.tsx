@@ -1,6 +1,6 @@
 import Link from "next/link";
-import React from "react";
-import { allProjects } from "contentlayer/generated";
+import { getAllProjects } from "../../lib/mdx";
+import type { Project } from "../../lib/mdx";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
@@ -8,6 +8,7 @@ import Particles from "../components/particles";
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
+	const allProjects = getAllProjects();
 	const sorted = allProjects
 		.filter((p) => p.published)
 		.sort(
