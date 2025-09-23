@@ -10,31 +10,45 @@ type Props = {
 export const Article: React.FC<Props> = ({ project, showReadme }) => {
 	const skills = project?.skills?.split("|") || [];
 	return (
-		<Link href={`/projects/${project?.slug}`}>
-			<article className="p-4 md:p-8">
-				<h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-zinc-200 group-hover:text-white font-display font-display">
-					{project?.title}
-				</h2>
-				<p className="z-20 mt-4 text-sm  duration-1000 text-zinc-400 group-hover:text-zinc-200">
-					{project?.description}
+		<article className="p-4 md:p-8 relative h-full flex flex-col">
+			<Link 
+				href={`/projects/${project?.slug}`}
+				className="absolute inset-0 z-30"
+				aria-label={`View ${project?.title} project`}
+			/>
+			<h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-zinc-200 group-hover:text-white font-display">
+				{project?.title}
+			</h2>
+			<p className="z-20 mt-4 text-sm duration-1000 text-zinc-400 group-hover:text-zinc-200">
+				{project?.description}
+			</p>
+			<div className="mt-4 flex-1">
+				<p className="text-sm text-zinc-400 group-hover:text-zinc-300 mb-2">
+					Technologies:
 				</p>
-				<p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
-					Skills:
+				<div className="flex flex-wrap gap-1">
 					{skills.map((skill) => (
-						<span key={skill} className="rounded-full text-xs bg-transparent py-1 px-2 mx-1 border border-amber-400/30 inline-block mb-2">{skill}</span>
+						<span 
+							key={skill} 
+							className="rounded-full text-xs bg-white/10 py-1 px-2 border border-cyan-400/30 text-cyan-300 group-hover:bg-cyan-400/20 group-hover:border-cyan-400/50 transition-colors duration-300"
+						>
+							{skill}
+						</span>
 					))}
-				</p>
-				<br/>
-				{showReadme ? 
-				(
-					<div className="absolute bottom-4 md:bottom-8">
-						<p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
-							Read more <span aria-hidden="true">&rarr;</span>
+				</div>
+			</div>
+			{showReadme && (
+				<div className="mt-4 pt-4 border-t border-white/10">
+					<div className="flex items-center justify-between">
+						<p className="text-sm text-cyan-400 group-hover:text-white transition-colors duration-300">
+							View Project Details
 						</p>
+						<span className="text-cyan-400 group-hover:text-white transition-colors duration-300">
+							→
+						</span>
 					</div>
-				): ""
-				}
-			</article>
-		</Link>
+				</div>
+			)}
+		</article>
 	);
 };

@@ -44,76 +44,81 @@ export const Header: React.FC<Props> = ({ project }) => {
 			ref={ref}
 			className="container mx-auto relative isolate overflow-hidden pt-14 sm:pt-20"
 		>
+			{/* Enhanced Navigation */}
 			<div
-				className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
+				className={`fixed inset-x-0 top-0 z-50 backdrop-blur-xl duration-200 border-b ${
 					isIntersecting
-						? "bg-zinc-900/0 border-transparent"
-						: "bg-white/10  border-zinc-200 lg:border-transparent"
+						? "bg-black/20 border-white/10"
+						: "bg-black/80 border-cyan-400/30"
 				}`}
 			>
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8">
-						<Link target="_blank" href="https://twitter.com/irtazahussain9">
-							<Twitter
-								className={`w-6 h-6 duration-200 hover:font-medium ${
-									isIntersecting
-										? " text-zinc-400 hover:text-zinc-100"
-										: "text-zinc-600 hover:text-zinc-900"
-								} `}
-							/>
+						<Link target="_blank" href="https://twitter.com/irtazahussain9" className="group">
+							<Twitter className="w-6 h-6 text-cyan-400 hover:text-white transition-colors duration-300 group-hover:scale-110" />
 						</Link>
-						<Link target="_blank" href="https://github.com/irtazahussain1">
-							<Github
-								className={`w-6 h-6 duration-200 hover:font-medium ${
-									isIntersecting
-										? " text-zinc-400 hover:text-zinc-100"
-										: "text-zinc-600 hover:text-zinc-900"
-								} `}
-							/>
+						<Link target="_blank" href="https://github.com/irtazahussain1" className="group">
+							<Github className="w-6 h-6 text-cyan-400 hover:text-white transition-colors duration-300 group-hover:scale-110" />
 						</Link>
-						<Link target="_blank" href="https://www.linkedin.com/in/mihussain1/">
-							<Linkedin
-								className={`w-6 h-6 duration-200 hover:font-medium ${
-									isIntersecting
-										? " text-zinc-400 hover:text-zinc-100"
-										: "text-zinc-600 hover:text-zinc-900"
-								} `}
-							/>
+						<Link target="_blank" href="https://www.linkedin.com/in/mihussain1/" className="group">
+							<Linkedin className="w-6 h-6 text-cyan-400 hover:text-white transition-colors duration-300 group-hover:scale-110" />
 						</Link>
 					</div>
 
 					<Link
 						href="/projects"
-						className={`duration-200 hover:font-medium ${
-							isIntersecting
-								? " text-zinc-400 hover:text-zinc-100"
-								: "text-zinc-600 hover:text-zinc-900"
-						} `}
+						className="text-cyan-400 hover:text-white transition-colors duration-300 group"
 					>
-						<ArrowLeft className="w-6 h-6 " />
+						<ArrowLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
 					</Link>
 				</div>
 			</div>
+
+			{/* Enhanced Header Content */}
 			<div className="container mx-auto relative isolate overflow-hidden py-14 sm:py-20">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
-					<div className="mx-auto max-w-2xl lg:mx-0">
-						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display">
+					{/* Project Badge */}
+					<div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 rounded-full mb-8">
+						<div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+						<span className="text-cyan-400 text-sm font-medium">PROJECT SHOWCASE</span>
+					</div>
+
+					{/* Project Title with Enhanced Styling */}
+					<div className="mx-auto max-w-4xl lg:mx-0 mb-8">
+						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display holographic-text mb-6">
 							{project.title}
 						</h1>
-						<p className="mt-6 text-lg leading-8 text-zinc-300">
+						
+						{/* Decorative Elements */}
+						<div className="flex items-center justify-center space-x-4 mb-6">
+							<div className="w-12 h-px bg-gradient-to-r from-transparent to-cyan-400"></div>
+							<div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+							<div className="w-12 h-px bg-gradient-to-l from-transparent to-cyan-400"></div>
+						</div>
+						
+						<p className="text-lg leading-8 text-cyan-300 max-w-3xl mx-auto">
 							{project.description}
 						</p>
 					</div>
 
-					<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-						<div className="grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-							{links.map((link) => (
-								<Link target="_blank" key={link.label} href={link.href}>
-									{link.label} <span aria-hidden="true">&rarr;</span>
-								</Link>
-							))}
+					{/* Enhanced Project Links */}
+					{links.length > 0 && (
+						<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+							<div className="flex flex-wrap justify-center gap-4">
+								{links.map((link) => (
+									<Link 
+										target="_blank" 
+										key={link.label} 
+										href={link.href}
+										className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 rounded-lg text-cyan-300 hover:from-cyan-500/30 hover:to-blue-500/30 hover:text-white transition-all duration-300"
+									>
+										<span className="font-semibold">{link.label}</span>
+										<span className="group-hover:translate-x-1 transition-transform">→</span>
+									</Link>
+								))}
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</header>
