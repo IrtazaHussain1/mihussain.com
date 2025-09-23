@@ -10,12 +10,12 @@ import Link from "next/link";
 export const revalidate = 60;
 
 type Props = {
-	params: {
+	params: Promise<{
 		slug: string;
-	};
+	}>;
 };
 
-export async function generateStaticParams(): Promise<Props["params"][]> {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
 	const allProjects = getAllProjects();
 	return allProjects
 		.filter((p) => p.published)
@@ -25,7 +25,7 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
 }
 
 export default async function PostPage({ params }: Props) {
-	const slug = params?.slug;
+	const { slug } = await params;
 	const project = getProjectBySlug(slug);
 
 	if (!project) {
