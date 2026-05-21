@@ -1,36 +1,91 @@
 ---
 title: Power Insight
-description: "Efficient Embedded System Data Collection, Storage, ETL, and Reporting Tool for Generators"
+description: Embedded data platform for generators collecting device telemetry, running ETL, and surfacing operational reports in Grafana.
 date: "2023-07-01"
+image: /projects/power-insight.png
 published: true
 skills: Flask|Bash|Dotnet|Angular|Grafana|Influx|Docker|Build Pipeline|Azure|Automation|Integrated System
 ---
+## What It Is
 
-# What is Power Insight?
-The "Efficient Embedded System Data Collection, Storage, ETL, and Reporting Tool for Generators" project aims to develop a comprehensive solution for gathering critical data from generators, storing it in a secure database, and performing Extract, Transform, Load (ETL) operations to ensure data accuracy and integrity. This embedded system tool will not only streamline the process of data collection from generators but also provide the capability to generate insightful reports based on the collected data. It offers real-time monitoring and analytics, enabling better decision-making and proactive maintenance. This project promises to revolutionize the management and optimization of generator systems, enhancing their reliability and performance.
-# Visuals
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/powerInsight/grafana.png" alt="grafana" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/powerInsight/stats.png" alt="stats" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-</div>
-<br/>
-# My Contributions
-As a Software Engineer at SSI, I utilised Python, Angular, Dotnet and Bash along with other tools and techs to develop many features of the product.
-Some of my key achievements and tasks included:
+Power Insight is an embedded-system data platform built for **generator fleets** and industrial operators who need dependable telemetry from the field. It collects readings from devices, stores them securely, runs **ETL** to keep data accurate, and exposes **real-time dashboards and reports** so teams can monitor health, spot anomalies, and plan maintenance before failures occur.
 
-- Engineered a Python and bash stats script for capturing device data, enhancing data management and documentation.
-- Designed user management with Grafana DB API and UI in Angular and Asp.net, improving user accessibility.
-- Programmed Network automation script using bash for embedded systems, optimizing operational efficiency.
-- Enhance the datapipeline process to publish data for algorithm to show reporting on Grafana charts.
-- Accomplished DevOps pipelining with AWS and Azure for OS and application deployment, bolstering system efficiency and
-documentation
+Instead of manual log pulls and ad hoc spreadsheets, operators get a **connected pipeline** from device to database to visualization designed for environments where connectivity, encryption, and uptime matter.
 
-# Techs and Tools I Used
-- **Languages and Frameworks**: Python, Dotnet, Angular, Bash Scripting, Grafana
-- **Databases**: Influx DB, Binary file(custom encryption)
-- **Testing**: Katalon, Selenium
-- **Others**: Restfull, Azure, Bitbucket, Jira, Teams, and Docker.
+---
+
+## The Problem We Solved
+
+Generator operations teams often face the same friction:
+
+- Device data is scattered across binary logs, local files, and one-off scripts
+- There is no single place to see fleet-wide trends or per-unit history
+- User and role management for dashboards is bolted on late in the project
+- Deployments to embedded hardware are slow, error-prone, and poorly documented
+
+**Power Insight unifies collection, storage, transformation, and reporting** so engineering and operations share one source of truth from the edge device through InfluxDB to Grafana charts.
+
+---
+
+## What We Work On
+
+### Edge data collection
+Capture generator telemetry with **Python and Bash** scripts tuned for embedded constraints, including custom binary formats and encryption where required.
+
+### ETL & analytics pipeline
+Transform raw device output into queryable time-series data in **InfluxDB**, feeding algorithms and Grafana panels used for operational reporting.
+
+### Access & administration
+Build **user management** flows using the Grafana DB API with **Angular** and **ASP.NET** UIs so the right people see the right dashboards.
+
+### Network & deployment automation
+Automate provisioning and updates on embedded systems with **Bash** network scripts and **Azure/AWS** pipelines for OS and application rollout.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Collect:** Scripts on or near the generator gather runtime metrics and events.
+2. **Store:** Data lands in InfluxDB (and related stores) with structure suited for time-series queries.
+3. **Transform:** ETL jobs normalize, enrich, and validate records before they power analytics.
+4. **Visualize:** Grafana dashboards show live and historical performance for operators and engineers.
+5. **Operate:** Automated deploy pipelines keep edge software and services up to date across the fleet.
+
+The system is built for **continuous monitoring**, not one-off exports so maintenance and capacity decisions are based on current fleet behavior.
+
+---
+
+## Key Outcomes
+
+- **Reliable ingestion:** Repeatable capture from embedded devices into a central time-series store.
+- **Actionable dashboards:** Grafana views tailored to generator KPIs and fleet comparisons.
+- **Controlled access:** Role-aware user management tied to reporting tools.
+- **Faster rollouts:** CI/CD-style pipelines reduce manual deployment on constrained hardware.
+- **Better data quality:** ETL steps catch inconsistencies before they skew operational decisions.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Collection** | Python, Bash | Scripts suited to embedded Linux and device-specific formats |
+| **Backend / services** | Flask, .NET | APIs and services for data and user-management features |
+| **Frontend** | Angular | Admin and configuration UIs for operators |
+| **Time-series DB** | InfluxDB | Efficient storage and queries for high-volume telemetry |
+| **Visualization** | Grafana | Industry-standard dashboards for ops and engineering |
+| **Automation** | Azure, AWS pipelines, Docker | Repeatable builds and deployments to edge and cloud |
+| **Testing** | Katalon, Selenium | Regression coverage for critical UI and integration paths |
+
+**Approach in practice:** We separated **edge collection** from **central analytics** devices stay thin and resilient while ETL and Grafana handle aggregation. DevOps pipelines were treated as part of the product so firmware, OS packages, and application releases could be promoted with the same rigor as backend code.
+
+---
+
+## Who It's For
+
+- Generator manufacturers and fleet operators
+- Embedded engineering teams shipping connected industrial products
+- Reliability and maintenance groups monitoring uptime and fuel/load metrics
+- Organizations that need audited, time-series history across many deployed units
+
+---

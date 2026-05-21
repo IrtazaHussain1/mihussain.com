@@ -1,46 +1,91 @@
 ---
 title: Ganexus
-description: Cloud Artificial Intelligence Operating System.
+description: A cloud AI operating system for creating, managing, training, and monetizing models, media, and digital assets in one workspace.
 date: "2022-03-01"
+image: /projects/ganexus.png
 published: true
 skills: Django|React(TS)|Redux|AWS|TrainML|Coinbase|Stripe
 ---
+## What It Is
 
-# What is Ganexus?
-Ganexus is pioneering the development of a cloud-based artificial intelligence operating system, poised to empower users with a transformative array of capabilities. This innovative system enables users to effortlessly generate, edit, analyze, control, search, print, store, share, trade, and interact with diverse forms of data, media, and software. With Nexus, the digital landscape is set to evolve, providing an all-encompassing solution for individuals and organizations seeking enhanced productivity, efficiency, and versatility in their digital interactions.
-# Visuals
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/ganexus/tablet.jpeg" alt="dashboard" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/ganexus/payments.png" alt="payments" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{textAlign: 'center' }}>
-    <img src="../projects/ganexus/images_catalog.png" alt="image catalog" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/ganexus/training_data.png" alt="taining page" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/ganexus/canvas.png" alt="canvas" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/ganexus/mobile.jpeg" alt="mobile view" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-</div>
-<br/>
-# My Contributions
-As a Remote Software Engineer, I utilised my skills in Python, ReactJS, and payment gateway Integration along with other tools and techs to develop many features of the product.
-Some of my key achievements and tasks included:
+Ganexus (Nexus) is a **cloud-based AI operating system** that lets users generate, edit, analyze, store, share, and trade digital assets from images and media to models and software-like workflows in a single environment. Rather than chaining together separate tools for training, payments, catalogs, and collaboration, teams work inside one product designed to feel like a **desktop OS in the browser**, with modules for catalogs, canvases, payments, and model training.
 
-- Design and develop the API and Frontend of application, Lead a development team.
-- Optimised data process for AI generated data.
-- Enhancing the user experience by the UI into an OS based homepage.
+The platform targets creators, startups, and teams who want **AI-assisted production** without rebuilding infrastructure for storage, billing, and ML pipelines from scratch.
 
-# Techs and Tools I Used
-- **Languages and Frameworks**: Django, React, Redux, Typescript
-- **Databases**: PostgreSQL
-- **Server**: AWS(EC2, S3, Lambda), TrainML
-- **Payment**: Stripe, Coinbase
-- **Others**: RestAPI, Github, Slack, Figma and Skype
+---
+
+## The Problem We Solved
+
+AI and creative teams typically juggle many disconnected systems:
+
+- Training data, generated outputs, and billing live in different products
+- Payment flows for digital goods are hard to wire securely to ML workflows
+- UIs feel like isolated apps instead of a cohesive creative workspace
+- Backend APIs struggle to keep pace as new asset types and integrations are added
+
+**Ganexus connects creation, training, commerce, and storage** so users can move from idea to trained model to paid delivery without leaving the platform.
+
+---
+
+## What We Work On
+
+### Core platform & API
+Design and build **Django** APIs and **React (TypeScript)** front ends, including leading delivery across a small engineering team.
+
+### AI data pipelines
+Optimize how generated and labeled data moves through the system so training and catalog features stay fast as volume grows.
+
+### OS-style experience
+Shape the homepage and navigation into an **OS-inspired shell** so modules (catalog, canvas, payments, training) feel like first-class apps.
+
+### Payments & cloud
+Integrate **Stripe** and **Coinbase** for purchases and digital commerce, with **AWS** (EC2, S3, Lambda) and **TrainML** for compute and storage.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Create:** Users upload or generate assets inside the Nexus workspace.
+2. **Organize:** Catalogs, canvases, and project views keep media and models discoverable.
+3. **Train:** ML workflows run against prepared datasets via integrated training services.
+4. **Monetize:** Stripe and Coinbase power checkout and digital goods flows.
+5. **Share & scale:** Cloud storage and serverless hooks support growth without re-architecting the core app.
+
+The product is intentionally **modular**: each capability (payments, training, asset library) can evolve independently while sharing auth, billing, and storage primitives.
+
+---
+
+## Key Outcomes
+
+- **Unified creative stack:** Training, assets, and payments in one product surface.
+- **Faster iteration:** API-first backend supports new modules without rewriting the shell.
+- **Monetization ready:** Payment gateways integrated for real digital commerce use cases.
+- **Scalable cloud footprint:** AWS services back storage and async workloads.
+- **Clearer UX:** OS-style navigation reduces context switching between AI tasks.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Backend** | Django, Python | Central APIs for users, assets, billing, and training hooks |
+| **Frontend** | React, Redux, TypeScript | Typed, stateful UI for complex multi-module workflows |
+| **Database** | PostgreSQL | Reliable relational store for users, assets, and transactions |
+| **ML / compute** | TrainML, AWS Lambda | Offloads training and bursty jobs from the main app servers |
+| **Storage & hosting** | AWS EC2, S3 | Durable media storage and deployable application tier |
+| **Payments** | Stripe, Coinbase | Fiat and crypto-ready checkout for digital products |
+| **Collaboration** | REST APIs, GitHub, Figma | Standard toolchain for design and delivery |
+
+**Approach in practice:** We built Ganexus as a **platform shell plus pluggable modules** shared auth, billing, and asset primitives on the backend, with Redux-driven React apps for each major surface. Heavy ML and file work stays asynchronous so day-to-day browsing and editing stay responsive.
+
+---
+
+## Who It's For
+
+- AI creators and studios shipping models and media products
+- Startups productizing generative workflows with built-in payments
+- Teams that want an “OS for AI work” instead of a patchwork of SaaS tools
+- Technical leads who need one API surface for assets, training, and commerce
+
+---

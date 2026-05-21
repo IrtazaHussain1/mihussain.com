@@ -1,38 +1,95 @@
 ---
 title: Permispop
-description: The revolutionary platform for true driving education freelancers.
-url: https://Permispop.fr
+description: A marketplace platform connecting driving students with instructors and nearby schools booking, scheduling, chat, and maps in one place.
 date: "2020-01-01"
+image: /projects/permispop.png
+url: https://permispop.fr
 published: true
 skills: Asp.Net|Reactjs|MongoDB|Nodejs|SocketIO|Windows IIS
 ---
+## What It Is
 
-# What is PermisPop?
-The PermisPop linking platform, thoughtfully crafted by educators, caters to permit professionals with a primary focus on 
-providing a comprehensive solution akin to Uber. Through its web and mobile applications, PermisPop seamlessly 
-connects students aspiring to learn driving with skilled instructors and nearby driving schools based on their geographical proximity. 
-This platform offers an innovative and user-friendly approach to facilitate driving education, thereby enhancing accessibility and 
-convenience for both students and professionals in the field.
-# Visuals
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/permispop/dashboard.png" alt="dashboard" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-  <div style={{ textAlign: 'center' }}>
-    <img src="../projects/permispop/bookings.png" alt="bookings" style={{ width: '100%', height: '100%', objectFit: 'cover', margin: '0px !important' }} />
-  </div>
-</div>
-<br/>
-# My Contributions
-As a Software Engineer at Falcon Consulting, I utilised Asp.Net core, Reactjs, Mongodb and Nodejs along with other tools and techs to develop many features of the product.
-Some of my key achievements and tasks included:
+PermisPop is a **driving-education marketplace** built by educators for permit professionals. Through web and mobile experiences, students find **instructors and nearby driving schools** based on location, book lessons, and manage their learning journey similar to how ride-hailing apps match supply and demand, but tailored to regulated driving instruction in France.
 
-- Engineered Permispop.fr v2, leading a team of 3 developers, delivering mobile and web app
-- Engineered scheduler, chat, and map modules.
-- Optimized the MongoDB queries for enhancing performance.
+The platform supports **freelance instructors and schools** with tools for scheduling, messaging, and geographic discovery so learning to drive is easier to access and operate at scale.
 
-# Techs and Tools I Used
-- **Languages and Frameworks**: Asp.Net core, ReactJS, NodeJS
-- **Databases**: Mongo DB
-- **Testing**: Jest
-- **Others**: RestAPI, Github, Slack, Figma and Windows IIS.
+---
+
+## The Problem We Solved
+
+Traditional driving education often relies on phone calls, paper schedules, and word-of-mouth referrals:
+
+- Students struggle to discover available instructors near them
+- Schools and freelancers lack a shared system for bookings and availability
+- Real-time chat and schedule changes are handled outside the product
+- Legacy v1 systems could not support mobile growth or fast feature delivery
+
+**PermisPop v2 centralizes discovery, booking, communication, and administration** so students, instructors, and schools interact through one modern stack.
+
+---
+
+## What We Work On
+
+### Marketplace & bookings
+Deliver **PermisPop.fr v2** as lead engineer on a team of three shipping coordinated **web and mobile** experiences for search, booking, and account management.
+
+### Scheduling
+Build reliable **scheduler** modules so instructors and schools manage slots, conflicts, and lesson lifecycle events.
+
+### Real-time communication
+Implement **chat** with **Socket.IO** so students and instructors coordinate without leaving the app.
+
+### Maps & discovery
+Integrate **map-based discovery** so learners see professionals and schools filtered by proximity and availability.
+
+### Data performance
+Tune **MongoDB** queries and indexes to keep list and booking views fast under real-world traffic.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Discover:** Students search instructors and schools on a map or list near their location.
+2. **Book:** Available slots are reserved through the scheduling system.
+3. **Coordinate:** In-app chat handles questions, changes, and reminders.
+4. **Deliver:** Instructors and schools run lessons and update statuses in the platform.
+5. **Scale:** APIs and databases support more regions, users, and concurrent sessions over time.
+
+The architecture splits **ASP.NET Core** services and **Node.js** real-time features so transactional booking stays consistent while chat remains low-latency.
+
+---
+
+## Key Outcomes
+
+- **Modern v2 launch:** Full rebuild with mobile parity and a clearer product foundation.
+- **Faster matching:** Geo-aware discovery connects students to nearby professionals.
+- **Real-time coordination:** Chat reduces drop-off between booking and first lesson.
+- **Operational efficiency:** Scheduling tools cut manual back-and-forth for schools and freelancers.
+- **Improved performance:** Optimized MongoDB access keeps core flows responsive.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Backend** | ASP.NET Core | Stable APIs for accounts, bookings, and business rules |
+| **Real-time** | Node.js, Socket.IO | Low-latency messaging between students and instructors |
+| **Frontend** | React | Interactive web client for search, booking, and dashboards |
+| **Database** | MongoDB | Flexible schema for users, geo queries, and booking documents |
+| **Testing** | Jest | Regression coverage for critical UI and integration paths |
+| **Hosting** | Windows IIS | Deployment target aligned with client infrastructure |
+| **Design & delivery** | REST APIs, GitHub, Figma | Standard collaboration across design and engineering |
+
+**Approach in practice:** We treated **v2 as a product reset** parallel web/mobile delivery, explicit modules for scheduler/chat/maps, and database tuning early so marketplace growth would not outpace query performance. Real-time features were isolated on Node so the core booking API could stay transactional and auditable.
+
+---
+
+## Who It's For
+
+- Driving students looking for nearby instructors or schools
+- Freelance driving instructors building a digital client base
+- Driving schools that need shared scheduling and communication tools
+- Product owners modernizing regulated education marketplaces
+
+---

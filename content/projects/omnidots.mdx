@@ -1,26 +1,91 @@
 ---
 title: Omnidots
-description: Intuitive and easy-to-use environmental monitoring solutions.
+description: Environmental monitoring software that helps teams collect sensor data, manage devices, and act on insights from one platform.
 date: "2023-07-01"
 url: https://omnidots.com
 published: true
 skills: Django|GraphQL|ReactJS|Storybook|Docker|MySQL|Elastic Search|Redis
 ---
+## What It Is
 
-# What is Omnidots?
-Omnidots is a leading market provider of intuitive and easy-to-use environmental monitoring solutions. We take pride in our market leadership in The Netherlands, Australia, and the UK and are actively expanding our presence in the US, France, and Germany. With our international ambitions, we strive to make a positive impact worldwide by constantly working towards expanding our reach.
-# My Contributions
-As a Software Engineer at Omnidots, I utilised Python, Reactjs, GraphQL and Linux along with other tools and techs to develop many features of the product.
-Some of my key achievements and tasks included:
+Omnidots provides intuitive environmental monitoring solutions for organizations that need reliable visibility into air quality, vibration, noise, and related sensor data. Teams use the platform to connect monitoring hardware, review measurements, configure alerts, and understand conditions across sites without juggling disconnected tools for ingestion, dashboards, and notifications.
 
-- Engineered performance enhancements for the download module, incorporating generators and background jobs with Celery
-- Transformed the notification page to React from Django using Storybook and implemented GraphQL API, enhancing user
-experience.
-- Programmed a robust unit-testing structure, dynamically mocking classes for elastic search data retrieval, ensuring application
-reliability.
+The product serves customers across **The Netherlands, Australia, the UK**, and an expanding footprint in the **US, France, and Germany**, with a focus on making professional-grade monitoring accessible to operators who are not data specialists.
 
-# Techs and Tools I Used
-- **Languages and Frameworks**: Django, ReactJS
-- **Databases**: My SQL and Elastic Search
-- **Testing**: Jest, Storybook, Pytest
-- **Others**: GraphQL, Github, Slack, Figma, and Docker.
+---
+
+## The Problem We Solved
+
+Environmental monitoring teams often struggle with fragmented workflows:
+
+- Sensor data lives in different systems, making it hard to compare sites or time ranges
+- Legacy admin pages are slow or difficult to maintain as the product grows
+- Large exports and report downloads can time out or block the UI
+- Notifications and monitoring views are inconsistent across older and newer parts of the stack
+
+**Omnidots addresses this by unifying device data, operational workflows, and user-facing experiences** in a single product surface, with a modern API layer and front end that scale as new regions and device types are added.
+
+---
+
+## What We Work On
+
+### Device data & downloads
+Improve how users pull historical and live sensor data, including performance-sensitive download flows that must handle large datasets without blocking the application.
+
+### Notifications & monitoring UI
+Modernize notification and monitoring experiences by moving key views to **React** with **Storybook**-driven components and **GraphQL** APIs backed by Django services.
+
+### Search & reliability
+Strengthen data retrieval from **Elasticsearch** with robust unit tests, including dynamic mocks for index-backed queries so regressions are caught before release.
+
+### Platform quality
+Expand automated testing (**Jest**, **Pytest**) and containerized workflows (**Docker**) so features ship with predictable behavior across environments.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Connect:** Monitoring hardware and gateways feed sensor readings into the platform.
+2. **Ingest & store:** Backend services persist and index data for search and reporting.
+3. **Monitor:** Users review dashboards, alerts, and notification views for their sites.
+4. **Export:** Teams download datasets or reports for compliance, analysis, or client delivery.
+5. **Iterate:** New regions, device types, and UI improvements roll out on a shared GraphQL + React stack.
+
+Heavy work such as **large exports** is handled with **generators and background jobs (Celery)** so everyday monitoring tasks stay responsive.
+
+---
+
+## Key Outcomes
+
+- **Faster downloads:** Background processing and streaming patterns reduce timeouts on large exports.
+- **Modern UX:** Key flows rebuilt in React with consistent components via Storybook.
+- **Clearer APIs:** GraphQL gives the front end precise data shapes and fewer over-fetches.
+- **Higher confidence:** Targeted tests around Elasticsearch-backed paths catch integration issues early.
+- **Easier scaling:** Dockerized services support repeatable deploys as Omnidots grows internationally.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Backend** | Django, Python | Mature framework for APIs, admin, and domain logic |
+| **API layer** | GraphQL | Flexible queries for React clients and evolving screens |
+| **Frontend** | React, Storybook | Component-driven UI with documented, testable building blocks |
+| **Databases** | MySQL, Elasticsearch | Transactional data plus fast search over sensor records |
+| **Background jobs** | Celery, Redis | Offloads long-running exports and async processing |
+| **Testing** | Jest, Pytest | Front-end and back-end coverage for critical paths |
+| **Infrastructure** | Docker | Consistent environments for development and deployment |
+
+**Approach in practice:** We treated performance-sensitive modules (downloads, search-backed views) as first-class concerns profiling slow paths, pushing work to Celery where appropriate, and pairing UI migrations with GraphQL contracts so Django and React could evolve without breaking existing customers.
+
+---
+
+## Who It's For
+
+- Environmental monitoring operators and field teams
+- Product and engineering teams shipping sensor-backed SaaS
+- Organizations expanding monitoring across multiple countries and sites
+- Stakeholders who need dependable exports, alerts, and audit-friendly data access
+
+---

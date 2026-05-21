@@ -14,6 +14,16 @@ export interface Project {
   skills: string;
   published: boolean;
   content: string;
+  /** Optional archive table column (e.g. Backend / Systems). */
+  domain?: string;
+  /** Optional archive table column (e.g. metric or outcome). */
+  result?: string;
+  /** Optional 1–2 sentence summary for meta and chat. */
+  summary?: string;
+  /** Optional SEO keywords. */
+  keywords?: string[];
+  /** Optional cover image path under /public (e.g. /projects/hrms-cloud.png). */
+  image?: string;
 }
 
 export function getAllProjects(): Project[] {
@@ -42,6 +52,13 @@ export function getAllProjects(): Project[] {
         skills: data.skills || '',
         published: data.published !== false,
         content,
+        domain: typeof data.domain === 'string' ? data.domain : '',
+        result: typeof data.result === 'string' ? data.result : '',
+        summary: typeof data.summary === 'string' ? data.summary : '',
+        keywords: Array.isArray(data.keywords)
+          ? data.keywords.filter((k: unknown) => typeof k === 'string')
+          : [],
+        image: typeof data.image === 'string' ? data.image : '',
       };
     })
     .filter((project) => project.published);
@@ -75,5 +92,12 @@ export function getProjectBySlug(slug: string): Project | null {
     skills: data.skills || '',
     published: data.published !== false,
     content,
+    domain: typeof data.domain === 'string' ? data.domain : '',
+    result: typeof data.result === 'string' ? data.result : '',
+    summary: typeof data.summary === 'string' ? data.summary : '',
+    keywords: Array.isArray(data.keywords)
+      ? data.keywords.filter((k: unknown) => typeof k === 'string')
+      : [],
+    image: typeof data.image === 'string' ? data.image : '',
   };
 }

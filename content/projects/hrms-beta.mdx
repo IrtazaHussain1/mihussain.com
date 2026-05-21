@@ -1,0 +1,97 @@
+---
+title: HRMS Cloud
+description: Multi-tenant HRMS SaaS connecting daily time entry, approvals, timesheets, projects, and invoicing for modern services teams.
+date: "2025-06-01"
+image: /projects/hrms-cloud.png
+published: true
+skills: Node.js|Express|TypeScript|React|Vite|PostgreSQL|Prisma|Docker|JWT|TanStack Query|Tailwind CSS|Vitest
+---
+## What It Is
+
+HRMS Cloud (HRMS Beta) is a **multi-tenant HR and operations platform** built for services organizations that bill by the hour. It connects **people, time, projects, and finance** in one product employees log end-of-day (EOD) work, managers approve time, finance turns approved billable hours into invoices, and platform admins govern tenants from a shared control plane.
+
+Instead of spreadsheets, separate timesheet tools, and manual billing exports, teams run the full **time-to-cash** cycle inside a single SaaS application with role-based access for employees, managers, finance, and administrators.
+
+---
+
+## The Problem We Solved
+
+Consulting and services firms often stitch together disconnected tools:
+
+- Daily work is captured in email or ad hoc forms, not linked to projects or clients
+- Managers lack a consistent approval queue for EOD and timesheet lines
+- Billable hours do not flow cleanly into invoice drafts and issued invoices
+- Multi-company SaaS needs **tenant isolation**, seat metering, and audit trails from day one
+
+**HRMS Cloud unifies workforce time, project assignments, and billing** so approved work becomes billable revenue with fewer handoffs and clearer governance.
+
+---
+
+## What We Work On
+
+### Time & approvals
+**EOD entries** and **timesheets** with manager approval workflows, tying daily work to projects and assignments.
+
+### Projects & clients
+**Project** and **client** management, employee **assignments**, utilization and burn reports for delivery leads.
+
+### Finance & invoicing
+**Invoice runs**, candidates, drafts, and issued invoices generated from approved billable time, plus revenue and collections views.
+
+### Multi-tenant platform
+**Tenant lifecycle**, billing plans, seat usage metering, and platform-admin control-plane APIs.
+
+### Governance & integrations
+**Append-only audit logs**, **API keys**, **webhooks**, data retention policies, and notification hooks for operational events.
+
+### Product delivery
+**React + Vite** web app, **Express + Prisma** API, **Docker Compose** local stack, CI security checks, staging smoke scripts, and release gates.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Log:** Employees submit EOD entries against assigned projects.
+2. **Approve:** Managers review and approve time for their teams.
+3. **Consolidate:** Approved lines roll into timesheets ready for billing.
+4. **Invoice:** Finance runs invoice generation from billable, approved hours.
+5. **Govern:** Admins audit activity, manage tenants, and configure integrations.
+
+Long-running or batch operations are designed so everyday logging and approvals stay responsive while finance and reporting catch up on structured data.
+
+---
+
+## Key Outcomes
+
+- **End-to-end time-to-cash:** EOD through invoicing without leaving the platform.
+- **Tenant-ready SaaS:** Isolation, roles, and platform controls for multiple organizations.
+- **Clear accountability:** Audit events and RBAC across employee, manager, finance, and admin roles.
+- **Operational confidence:** Integration tests, smoke scripts, and CI security workflows.
+- **Modern stack:** Type-safe API and a fast React client for daily use.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Backend** | Node.js, Express, TypeScript, Zod | Typed APIs with validated request contracts |
+| **Frontend** | React 19, Vite, TanStack Query, Tailwind | Fast UI for EOD, approvals, and finance screens |
+| **Database** | PostgreSQL, Prisma | Relational model for tenants, time, and invoices |
+| **Auth** | JWT, bcrypt, RBAC matrix | Secure, role-aware access per tenant |
+| **Testing** | Vitest, Supertest | API and integration coverage for critical flows |
+| **Ops** | Docker Compose, GitHub Actions | Repeatable local dev and automated security checks |
+| **Integrations** | Webhooks, API keys | Extensibility for Slack-style ops and external systems |
+
+**Approach in practice:** We modeled the domain around **approved time as the source of truth for billing**, EOD and timesheet states gate what finance can invoice. Multi-tenant boundaries and audit logging were built in early so the product could scale as a SaaS control plane, not a single-company tool.
+
+---
+
+## Who It's For
+
+- Services and consulting firms billing by the hour
+- HR and operations teams managing EOD and timesheet compliance
+- Finance teams issuing invoices from approved project time
+- Platform operators running multi-tenant workforce SaaS
+
+---

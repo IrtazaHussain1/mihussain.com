@@ -1,0 +1,100 @@
+---
+title: ScrapeOps
+description: Web scraping operations platform proxy aggregation, structured parsers, Scrapy monitoring, and AI-assisted scraper tooling in one product suite.
+date: "2024-06-01"
+image: /projects/scrapeops.png
+url: https://scrapeops.io
+published: true
+skills: Go|Gin|Node.js|Express|Django|Angular|Next.js|PostgreSQL|Prisma|Redis|Scrapy|Stripe|AWS|Docker|MCP
+---
+## What It Is
+
+[ScrapeOps](https://scrapeops.io) is a **web scraping operations platform** that helps developers and data teams run production crawlers without assembling every piece themselves. It combines **proxy aggregation** (residential, mobile, datacenter, JS rendering, anti-bot bypass), **structured parsing** for major sites, **Scrapy job monitoring**, and **AI-assisted scraper building** plus marketing tools, docs, a Chrome extension, and an **MCP server** for AI agents.
+
+Users manage accounts, jobs, spiders, alerts, and billing from a central dashboard while high-throughput proxy and parser traffic is served by dedicated **Go** services.
+
+---
+
+## The Problem We Solved
+
+Production scraping teams routinely hit the same walls:
+
+- Proxies from many vendors need rotation, geo targeting, and fallback logic in custom code
+- Anti-bot and JS-heavy sites break naive HTTP clients
+- Maintaining site-specific parsers is slow and brittle when layouts change
+- Scrapy fleets lack unified monitoring, scheduling, and alerting
+- New scrapers take too long to prototype, test, and ship
+
+**ScrapeOps packages proxies, parsers, monitoring, and AI tooling** behind consistent APIs and a single product surface.
+
+---
+
+## What We Work On
+
+### Proxy platform
+**Go proxy gateways** (`proxy.scrapeops.io`) with provider fallbacks, sticky sessions, rendering levels, residential/mobile routes, and pay-per-GB billing stats in Redis.
+
+### Parser platform
+**Go parser service** with hardcoded parsers (Amazon, Walmart, eBay, Target, Indeed, Zillow, and more) and **AI self-healing parsers** schema-driven extraction, LLM validation, and multi-language code export.
+
+### Monitoring & jobs
+**Django** and **Express** backends for Scrapy jobs, spiders, servers, schedules, alerts (email/Slack), and legacy `backend.scrapeops.io` APIs.
+
+### Customer-facing apps
+**Angular** dashboard (jobs, proxy, parser, AI assistant, admin), **Next.js** marketing site (proxy comparisons, testers, playbook content), and **Docusaurus** documentation.
+
+### AI & integrations
+**AI scraper generator**, URL analyzer, fix sessions, **ScrapeOps MCP** (`maps_web`, `extract_data`), **n8n** community node, and **Chrome extension** for on-page analysis.
+
+### Data & operations
+**Prisma/PostgreSQL** schema, proxy test pipelines (frontend → queue → **proxy-worker** → internal Flask executor), **Stripe** billing, S3/Spaces storage, Docker/PM2/nginx deploys, and CI workflows.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Connect:** Developers add API keys and configure spiders, proxies, or parser schemas in the dashboard.
+2. **Route traffic:** Requests go through ScrapeOps proxy endpoints with provider selection and anti-bot options.
+3. **Extract:** Parser APIs return structured data from known sites or AI-generated parsers.
+4. **Monitor:** Jobs and spiders report into ScrapeOps for history, alerts, and server management.
+5. **Iterate:** AI assistant, MCP, and testing tools shorten the loop from URL to working scraper.
+
+Proxy testing flows queue work through **Redis** and workers so performance metrics inform optimal provider sequences.
+
+---
+
+## Key Outcomes
+
+- **One API for many proxies:** Rotation, geo, rendering, and bypass without vendor-specific glue code.
+- **Faster structured data:** Pre-built and AI-maintained parsers for common domains.
+- **Operational visibility:** Jobs, spiders, alerts, and team roles in a shared dashboard.
+- **Shorter build cycles:** AI scraper builder, analyzers, and agent integrations (MCP, n8n).
+- **Production-grade footprint:** Multi-service architecture with Go data plane and mature billing/storage.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Proxy / parser APIs** | Go 1.22+, Gin | High-throughput gateway services |
+| **App APIs** | Express, Django, Flask | Auth, billing, jobs, internal test execution |
+| **Frontends** | Angular 15, Next.js 15, Docusaurus | Dashboard, marketing, and docs |
+| **Data** | PostgreSQL, Prisma, Redis | Accounts, jobs, proxy stats, queues |
+| **Scraping** | Scrapy ecosystem, Python test tooling | Native fit for crawler customers |
+| **Payments & storage** | Stripe, AWS S3, DigitalOcean Spaces | Subscriptions and artifact storage |
+| **Integrations** | MCP server, n8n node, Chrome extension | AI agents and workflow automation |
+| **Infra** | Docker, PM2, nginx, GitHub Actions | Multi-repo deploy and CI |
+
+**Approach in practice:** ScrapeOps is intentionally **multi-service**, Go handles hot proxy/parser paths, Node and Python own product APIs and Scrapy integration, and frontends split dashboard vs. growth content. Shared database and queue patterns let proxy testing and billing stay consistent while each service can scale on its own.
+
+---
+
+## Who It's For
+
+- Web scraping and data engineering teams running Scrapy or custom crawlers
+- Developers who need reliable proxies plus structured extraction APIs
+- Platform admins managing teams, plans, and proxy/parser configuration
+- AI and automation users consuming ScrapeOps via MCP or n8n
+
+---

@@ -1,0 +1,96 @@
+---
+title: XProxy Tester
+description: Continuous proxy observability for the XProxy fleet health checks, IP rotation verification, stability scoring, and Grafana dashboards.
+date: "2024-12-01"
+image: /projects/x-proxy-tester.png
+published: true
+skills: Node.js|TypeScript|MySQL|Prisma|BullMQ|Redis|Docker|Grafana|Prometheus|Vitest
+---
+## What It Is
+
+XProxy Tester is an **automated proxy observability service** that syncs devices from the **XProxy Portal**, runs continuous health checks through each proxy, and records uptime, stability, rotation behavior, speed, and errors into **MySQL** for **Grafana** dashboards and operational APIs.
+
+Operators get a live picture of which proxies are healthy, which are failing rotation or stability thresholds, and when the system should **auto-deactivate** or **recover** endpoints without manual spot checks across a large fleet.
+
+---
+
+## The Problem We Solved
+
+Proxy fleets at scale are hard to trust without constant measurement:
+
+- A proxy can appear “up” while failing rotation or returning the same egress IP
+- Manual testing does not keep pace with hundreds of rotating endpoints
+- Raw request logs grow quickly and slow down analytics without aggregation and archival
+- Incidents are discovered late when there is no single dashboard for stability and errors
+
+**XProxy Tester closes that gap** with scheduled tests, rotation verification, stability classes, and fleet-wide metrics designed for production operations.
+
+---
+
+## What We Work On
+
+### Continuous testing
+Per-proxy test loops against configurable IP-check targets, recording success, latency, and failure reasons.
+
+### IP rotation
+Rotation commands, cycle management, and verification that outbound IPs actually change when expected.
+
+### Stability & reliability
+**Stable / UnstableHourly / UnstableDaily** classification, **auto-deactivation** on repeated failures, and **auto-recovery** when health returns.
+
+### Performance telemetry
+Periodic **speed tests** (download/upload) and response-time tracking for capacity planning.
+
+### Data pipeline
+**BullMQ** write queues, batch writers, **MySQL** partitioning, **daily and 5-minute aggregations**, and **archival** of raw request history.
+
+### Operations surface
+HTTP health (`/health`, `/ready`, `/live`), **Prometheus** `/metrics`, problems analytics API, and a catalog of **Grafana** dashboards (overview, rotation, errors, duplicate IP, and more).
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Sync:** Devices and proxies are pulled from the XProxy Portal API.
+2. **Test:** Each proxy is exercised on a short interval through its tunnel to an external check URL.
+3. **Rotate & verify:** Rotation jobs run where configured; the service confirms the egress IP changed.
+4. **Score:** Stability rules and aggregates classify fleet health over time.
+5. **Act & visualize:** Failing proxies can be deactivated automatically; Grafana and APIs expose trends and incidents.
+
+Heavy writes are **queued and batched** so testing loops stay responsive under high request volume.
+
+---
+
+## Key Outcomes
+
+- **Always-on visibility:** Continuous metrics instead of ad hoc proxy checks.
+- **Rotation confidence:** Detect same-IP and no-rotation conditions before they hit users.
+- **Safer fleet operations:** Auto-deactivation and recovery reduce manual firefighting.
+- **Scalable telemetry:** Queues, partitioning, and rollups keep MySQL usable at volume.
+- **Operator-ready dashboards:** Grafana views aligned to stability, performance, and errors.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Runtime** | Node.js 20+, TypeScript | Typed services for testing and API control |
+| **Database** | MySQL 8, Prisma | Structured proxy, request, rotation, and summary models |
+| **Queues** | BullMQ, Redis, ioredis | Async persistence under burst test traffic |
+| **Scheduling** | node-cron, internal timers | Device sync, aggregations, archival, speed tests |
+| **HTTP** | Native Node HTTP server, axios, undici | Lightweight control plane and outbound checks |
+| **Observability** | Grafana, Prometheus, pino | Dashboards, metrics, and structured logs |
+| **Deploy** | Docker, Docker Compose, Vitest | Containerized stack and automated tests |
+
+**Approach in practice:** We separated **hot test loops** from **cold storage writes** tests enqueue results, batch writers land them in partitioned tables, and aggregations feed Grafana. Stability and rotation are first-class domains, not afterthought columns on a uptime ping.
+
+---
+
+## Who It's For
+
+- Teams operating the XProxy Portal proxy infrastructure
+- SREs and operators monitoring rotation, stability, and incident trends
+- Engineering groups building reliability automation around third-party proxy fleets
+
+---

@@ -1,21 +1,26 @@
 "use client";
-import { ArrowLeft, Eye, Github, Linkedin, Twitter } from "lucide-react";
+
+import { ArrowLeft, Github, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import type { Project } from "@/lib/mdx";
+import { formatProjectYear } from "@/lib/project-display";
 
 type Props = {
-	project: {
-		url?: string;
-		title: string;
-		description: string;
-		repository?: string;
-		skills?: string;
-	};
+	project: Pick<
+		Project,
+		| "title"
+		| "description"
+		| "url"
+		| "repository"
+		| "skills"
+		| "date"
+	>;
 };
-export const Header: React.FC<Props> = ({ project }) => {
-	const ref = useRef<HTMLElement>(null);
-	const [isIntersecting, setIntersecting] = useState(true);
 
+/**
+ * Project hero: editorial title block (global StudioNav handles site nav).
+ */
+export function Header({ project }: Props) {
 	const links: { label: string; href: string }[] = [];
 	if (project.repository) {
 		links.push({
@@ -29,98 +34,89 @@ export const Header: React.FC<Props> = ({ project }) => {
 			href: project.url,
 		});
 	}
-	useEffect(() => {
-		if (!ref.current) return;
-		const observer = new IntersectionObserver(([entry]) =>
-			setIntersecting(entry.isIntersecting),
-		);
-
-		observer.observe(ref.current);
-		return () => observer.disconnect();
-	}, []);
 
 	return (
-		<header
-			ref={ref}
-			className="container mx-auto relative isolate overflow-hidden pt-14 sm:pt-20"
-		>
-			{/* Enhanced Navigation */}
-			<div
-				className={`fixed inset-x-0 top-0 z-50 backdrop-blur-xl duration-200 border-b ${
-					isIntersecting
-						? "bg-black/20 border-white/10"
-						: "bg-black/80 border-cyan-400/30"
-				}`}
-			>
-				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
-					<div className="flex justify-between gap-8">
-						<Link target="_blank" href="https://twitter.com/irtazahussain9" className="group">
-							<Twitter className="w-6 h-6 text-cyan-400 hover:text-white transition-colors duration-300 group-hover:scale-110" />
-						</Link>
-						<Link target="_blank" href="https://github.com/irtazahussain1" className="group">
-							<Github className="w-6 h-6 text-cyan-400 hover:text-white transition-colors duration-300 group-hover:scale-110" />
-						</Link>
-						<Link target="_blank" href="https://www.linkedin.com/in/mihussain1/" className="group">
-							<Linkedin className="w-6 h-6 text-cyan-400 hover:text-white transition-colors duration-300 group-hover:scale-110" />
-						</Link>
-					</div>
-
+		<header className="mb-12 border-b pb-10" style={{ borderColor: "var(--line-soft)" }}>
+			<div className="mb-6 flex items-center justify-between gap-4">
+				<Link
+					href="/projects"
+					className="mono inline-flex items-center gap-2 text-[11px] uppercase tracking-wide"
+					style={{ color: "var(--fg-mute)" }}
+				>
+					<ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={1.25} />
+					Index / Work
+				</Link>
+				<div className="flex items-center gap-3">
 					<Link
-						href="/projects"
-						className="text-cyan-400 hover:text-white transition-colors duration-300 group"
+						target="_blank"
+						href="https://twitter.com/irtazahussain9"
+						className="opacity-70 transition-opacity hover:opacity-100"
+						aria-label="Twitter"
 					>
-						<ArrowLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
+						<Twitter className="h-5 w-5" strokeWidth={1.25} />
+					</Link>
+					<Link
+						target="_blank"
+						href="https://github.com/irtazahussain1"
+						className="opacity-70 transition-opacity hover:opacity-100"
+						aria-label="GitHub"
+					>
+						<Github className="h-5 w-5" strokeWidth={1.25} />
+					</Link>
+					<Link
+						target="_blank"
+						href="https://www.linkedin.com/in/mihussain1/"
+						className="opacity-70 transition-opacity hover:opacity-100"
+						aria-label="LinkedIn"
+					>
+						<Linkedin className="h-5 w-5" strokeWidth={1.25} />
 					</Link>
 				</div>
 			</div>
 
-			{/* Enhanced Header Content */}
-			<div className="container mx-auto relative isolate overflow-hidden py-14 sm:py-20">
-				<div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
-					{/* Project Badge */}
-					<div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 rounded-full mb-8">
-						<div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-						<span className="text-cyan-400 text-sm font-medium">PROJECT SHOWCASE</span>
-					</div>
-
-					{/* Project Title with Enhanced Styling */}
-					<div className="mx-auto max-w-4xl lg:mx-0 mb-8">
-						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display holographic-text mb-6">
-							{project.title}
-						</h1>
-						
-						{/* Decorative Elements */}
-						<div className="flex items-center justify-center space-x-4 mb-6">
-							<div className="w-12 h-px bg-gradient-to-r from-transparent to-cyan-400"></div>
-							<div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-							<div className="w-12 h-px bg-gradient-to-l from-transparent to-cyan-400"></div>
-						</div>
-						
-						<p className="text-lg leading-8 text-cyan-300 max-w-3xl mx-auto">
-							{project.description}
-						</p>
-					</div>
-
-					{/* Enhanced Project Links */}
-					{links.length > 0 && (
-						<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-							<div className="flex flex-wrap justify-center gap-4">
-								{links.map((link) => (
-									<Link 
-										target="_blank" 
-										key={link.label} 
-										href={link.href}
-										className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 rounded-lg text-cyan-300 hover:from-cyan-500/30 hover:to-blue-500/30 hover:text-white transition-all duration-300"
-									>
-										<span className="font-semibold">{link.label}</span>
-										<span className="group-hover:translate-x-1 transition-transform">→</span>
-									</Link>
-								))}
-							</div>
-						</div>
-					)}
-				</div>
+			<div className="eyebrow mb-4">§&nbsp;&nbsp;Project</div>
+			<h1
+				className="display mb-6 max-w-4xl"
+				style={{ fontSize: "clamp(40px, 6vw, 72px)" }}
+			>
+				{project.title}
+			</h1>
+			<p
+				className="max-w-2xl text-[17px] leading-relaxed"
+				style={{ color: "var(--fg-mute)" }}
+			>
+				{project.description}
+			</p>
+			<div className="mono mt-6 flex flex-wrap gap-6 text-[11px] uppercase tracking-wide" style={{ color: "var(--fg-dim)" }}>
+				<span>Year · {formatProjectYear(project)}</span>
+				{project.skills ? (
+					<span>
+						Stack ·{" "}
+						{project.skills
+							.split("|")
+							.slice(0, 4)
+							.map((s) => s.trim())
+							.filter(Boolean)
+							.join(" · ")}
+					</span>
+				) : null}
 			</div>
+
+			{links.length > 0 ? (
+				<div className="mt-8 flex flex-wrap gap-3">
+					{links.map((link) => (
+						<Link
+							key={link.label}
+							target="_blank"
+							rel="noopener noreferrer"
+							href={link.href}
+							className="btn"
+						>
+							{link.label}
+						</Link>
+					))}
+				</div>
+			) : null}
 		</header>
 	);
-};
+}

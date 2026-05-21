@@ -1,58 +1,39 @@
 import "../global.css";
-import { Inter } from "next/font/google";
-import LocalFont from "next/font/local";
 import type { Metadata } from "next";
+import { Instrument_Serif } from "next/font/google";
 import { Analytics } from "./components/analytics";
+import { JsonLd } from "./components/json-ld";
+import { StudioNav } from "./components/studio-nav";
+import { StudioRails } from "./components/studio-rails";
+import { PersonifyWidget } from "./components/personify-widget";
+import {
+	buildPageMetadata,
+	DEFAULT_DESCRIPTION,
+	SITE_NAME,
+} from "@/lib/seo/metadata";
+import { personJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = {
+	...buildPageMetadata({
+		title: SITE_NAME,
+		description: DEFAULT_DESCRIPTION,
+		path: "/",
+	}),
 	title: {
-		default: "Irtaza Hussain",
-		template: "%s | Irtaza Hussain",
-	},
-	description: "Sr. Software engineer & founder of Softekton.com",
-	openGraph: {
-		title: "Irtaza Hussain",
-		description:
-			"Sr. Software engineer & founder of Softekton.com",
-		url: "https://irtazahussain.com/",
-		siteName: "Irtaza Hussain",
-		images: [
-			{
-				url: "https://irtazahussain.com/og.png",
-				width: 1920,
-				height: 1080,
-			},
-		],
-		locale: "en-US",
-		type: "website",
-	},
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-		},
-	},
-	twitter: {
-		title: "irtazahussain9",
-		card: "summary_large_image",
+		default: SITE_NAME,
+		template: `%s | ${SITE_NAME}`,
 	},
 	icons: {
 		shortcut: "/favicon.png",
 	},
 };
-const inter = Inter({
-	subsets: ["latin"],
-	variable: "--font-inter",
-});
 
-const calSans = LocalFont({
-	src: "../public/fonts/CalSans-SemiBold.ttf",
-	variable: "--font-calsans",
+const instrumentSerif = Instrument_Serif({
+	subsets: ["latin"],
+	weight: "400",
+	style: ["normal", "italic"],
+	variable: "--font-instrument-display",
+	display: "swap",
 });
 
 export default function RootLayout({
@@ -61,16 +42,43 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+		<html
+			lang="en"
+			className={`${instrumentSerif.variable} studio-theme`}
+			suppressHydrationWarning
+		>
 			<head>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin="anonymous"
+				/>
+				<link
+					href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+					rel="stylesheet"
+				/>
 				<Analytics />
+				<link
+					rel="alternate"
+					type="text/plain"
+					href="/llms.txt"
+					title="LLM site index"
+				/>
 			</head>
 			<body
-				className={`bg-black ${
-					process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+				className={`studio-theme ${
+					process.env.NODE_ENV === "development" ? "debug-screens" : ""
 				}`}
+				data-texture="grid"
+				data-density="regular"
+				suppressHydrationWarning
 			>
-				{children}
+				<JsonLd data={[personJsonLd(), websiteJsonLd()]} />
+				<StudioRails />
+				<StudioNav />
+				<div className="shell">{children}</div>
+				<PersonifyWidget />
 			</body>
 		</html>
 	);

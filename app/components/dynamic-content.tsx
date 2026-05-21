@@ -103,7 +103,7 @@ export default function DynamicContent({ className = "" }: DynamicContentProps) 
               "{quote.text}"
             </blockquote>
             <cite className="text-cyan-300 text-sm font-medium">
-              — {quote.author}
+              · {quote.author}
             </cite>
           </div>
           

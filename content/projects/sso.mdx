@@ -1,24 +1,94 @@
 ---
 title: SSO
-description: Single SignOn authenication app using Fastapi and mongodb
-date: "2001-12-04"
+description: A centralized single sign-on service and reusable package for authenticating users across microservices with FastAPI and MongoDB.
+date: "2021-12-04"
+image: /projects/sso.png
 published: true
 repository: IrtazaHussain1/SSO
 skills: FastAPI|HTML|Mongodb|pip package
 ---
+## What It Is
 
-# What is SSO?
-SSO is single signon application for centralize authenication of microservices.
-# My Contributions
-As a Contributor Software Engineer, I utilised my skills in Python, FastAPI, Mongodb skills to plan and develop signle signon package to be used in the later projects.
-Some of my key achievements and tasks included:
+SSO is a **single sign-on authentication service** built to give microservices and internal apps one trusted place to verify users. Instead of every service implementing its own login, token handling, and session rules, applications delegate authentication to SSO and consume a **shared, pip-installable client package** designed for reuse across later projects.
 
-- Design and develop the API and Frontend of application, Lead a development team.
-- Build a clean architecture to handle optimzatiomn.
-- Intergated a pre-commits to handle code qualitu.
+The solution includes a **FastAPI** backend, MongoDB-backed identity storage, and a simple HTML front end for flows that need a browser-based login experience.
 
-# Techs and Tools I Used
-- **Languages and Frameworks**: FastAPI, HTML, BootStrap
-- **Databases**: Mongodb
-- **Server**: AWS(EC2, S3, Lambda)
-- **Others**: RestAPI, Github,
+---
+
+## The Problem We Solved
+
+Distributed systems often duplicate auth poorly:
+
+- Each microservice reinvents login, tokens, and session expiry
+- Security fixes do not propagate because logic is copied, not shared
+- There is no standard package teams can drop into new services
+- Code quality varies without enforced hooks or consistent architecture
+
+**SSO centralizes authentication** and packages integration patterns so new services authenticate the same way from day one.
+
+---
+
+## What We Work On
+
+### Authentication API
+Design and implement **FastAPI** endpoints for sign-in, token issuance, and service-to-service auth patterns.
+
+### Reusable client library
+Build a **pip-distributable package** other projects import instead of copying auth code.
+
+### Clean architecture
+Structure modules so security rules, persistence, and HTTP layers stay separated and testable.
+
+### Developer experience
+Add **pre-commit hooks** and conventions that keep formatting and basic quality checks consistent across contributions.
+
+### Deployment-ready stack
+Run the service on **AWS** (EC2, S3, Lambda where appropriate) with MongoDB as the identity store.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Register apps:** Microservices are configured to trust the SSO issuer.
+2. **Sign in:** Users authenticate once via the SSO UI or API.
+3. **Issue tokens:** SSO returns credentials other services can validate.
+4. **Integrate:** Consumer apps use the shared package to verify sessions on each request.
+5. **Maintain:** Updates to auth policy ship once in SSO and propagate via package versions.
+
+The design favors **one source of truth** for identity data in MongoDB and thin clients in each downstream service.
+
+---
+
+## Key Outcomes
+
+- **Consistent auth:** One implementation replaces scattered per-service logins.
+- **Faster bootstrapping:** New microservices integrate via a published package.
+- **Clear boundaries:** Layered architecture separates HTTP, domain, and persistence concerns.
+- **Higher code quality:** Pre-commit automation catches issues before merge.
+- **Reusable foundation:** Built explicitly to support future products in the same ecosystem.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **API framework** | FastAPI | Fast, typed HTTP layer for auth endpoints |
+| **Frontend** | HTML, Bootstrap | Lightweight login and admin flows in the browser |
+| **Database** | MongoDB | Flexible document store for users and client records |
+| **Distribution** | Python pip package | Standard install path for consuming services |
+| **Cloud** | AWS EC2, S3, Lambda | Hosting and supporting infrastructure for the auth service |
+| **Tooling** | GitHub, pre-commit | Collaboration and automated local checks |
+
+**Approach in practice:** We optimized for **reuse first** the HTTP API and the pip package share the same contracts so security behavior cannot drift between “central SSO” and “embedded client.” Pre-commit and modular layout keep the codebase approachable as more services depend on it.
+
+---
+
+## Who It's For
+
+- Teams building multiple microservices that need shared login
+- Engineers who want a small, self-hosted SSO instead of a heavy commercial IdP
+- Open-source consumers evaluating a FastAPI + MongoDB auth reference
+- Projects that plan to standardize on one internal identity provider over time
+
+---

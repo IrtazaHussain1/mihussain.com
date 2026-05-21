@@ -1,26 +1,98 @@
 ---
 title: Saleshoney
-description: AI-Driven Leads, Unmatched Results – Transform Your Marketing with Precision Campaigns and Continuous Optimization.
+description: An AI-powered sales operations platform that helps teams find better contact data, run outreach, and track results in one place.
+summary: SmashDeck (Saleshoney) is a multi-client B2B sales platform for contact enrichment, outreach, calling, and reporting in one workspace.
 date: "2024-05-01"
+image: /projects/saleshoney.png
 url: https://saleshoney.io
 published: true
-skills: Nodejs|MySQL|ReactJS|AWS|Sendgrid|Brevo|SES|Lead Generation|OPENAI|G-SUITE|GoDaddy
+skills: Node.js|MySQL|ReactJS|AWS|SendGrid|Brevo|SES|Lead Generation|OpenAI|G-Suite|GoDaddy
+---
+## What It Is
+
+SmashDeck is a web-based platform built for B2B sales and growth teams. Instead of jumping between spreadsheets, enrichment tools, email inboxes, dialers, and reporting dashboards, teams use SmashDeck as a single workspace to manage prospects, improve contact records, send outreach, make calls, and see what is working.
+The product is used in a **multi-client setup**, meaning one team can manage several customers or business units from the same system, each with its own contacts, settings, and reports.
+
 ---
 
-# What is Saleshoney?
-Saleshoney specializes in lead generation, leveraging AI to create highly effective campaigns for clients. We start with a comprehensive consultation to gather your campaign objectives and identify target market segments. Within the first week, you'll receive a curated list of contacts and access to our web app, alongside insights into our snippet creation process. By the end of the first month, we assess campaign performance to refine our targeting strategy. We continuously iterate and refine our process weekly, experimenting with your Total Addressable Market (TAM) and providing regular reports to optimize your marketing efforts and drive ongoing success.
-# My Contributions
-As a Software Engineer at Saleshoney, I utilised Nodejs, Reactjs, MySQL and AWS along with other tools and techs to develop many features of the product.
-Some of my key achievements and tasks included:
+## The Problem We Solved
 
-- Engineered performance enhancements for the emails sending module, incorporating background jobs and multi-threading.
-- Integrated multiple Email service provider like Brevo(Sendinblue), and Amazon SES to send emails seemlessly.
-- Enhaced customer engagement process and utlized data to improve custome interaction.
-- Imporved reporting for the compaign to analyize the historical data and stats.
-- Integrated a workflow to dynamically buy domains and setup emails against those domain via G-SUITE and use them for email sending.
+Sales teams often waste time on repetitive manual work:
 
-# Techs and Tools I Used
-- **Languages and Frameworks**: Nodejs, ReactJS
-- **Databases**: My SQL, Redis
-- **Testing**: Jest,
-- **Others**: Github, Slack, Sendgrid, Brevo, Amazon SES, G-Suite, OPENAI, GoDaddy API, and Lambda.
+- Contact lists are incomplete or outdated (missing emails, wrong phone numbers, weak company info)
+- Enrichment happens in separate tools, then data is copied back into spreadsheets
+- Outreach runs across Gmail, SendGrid, sequencers, and dialers with little visibility
+- Managers struggle to see import progress, enrichment success, email performance, and call activity in one view
+
+**SmashDeck fixes this by connecting those workflows into one product.** Teams import contacts once, enrich and verify them inside the platform, launch email and call activity, export qualified leads to tools like Outreach or PhoneBurner, and review results through built-in reports.
+
+---
+
+## What We Work On
+
+### Contact management
+Import contacts in bulk, organize them by client, update statuses, apply tags and segments, and keep a clean record of each person's email, phone, company, and outreach history.
+
+### Data enrichment
+Improve contact quality using external data providers (mainly **Apollo.io**, with support for **Hunter** and **Skrapp**). The platform can find verified emails, phone numbers, job titles, LinkedIn profiles, and company details at scale without someone checking each row manually.
+
+### Outreach & communication
+Run email campaigns with AI-assisted content, send through trusted email providers, handle replies and follow-ups, and support calling/SMS through **Twilio** from the same system.
+
+### Operations & reporting
+Give admins and managers visibility into enrichment progress, pending jobs, imports, meetings, email activity, and call performance so they can spot issues early and measure outcomes.
+
+### Integrations
+Connect SmashDeck to the tools sales teams already use: **Gmail / Google Workspace**, **SendGrid**, **Outreach**, **PhoneBurner**, **Slack**, **GoDaddy** (domains), and verification services like **ZeroBounce** and **Abstract API**.
+
+---
+
+## How It Works (In Simple Terms)
+
+1. **Import:** Upload or add contacts for a client.
+2. **Enrich:** The system looks up missing emails and phone numbers and updates each record.
+3. **Verify:** Emails and phone numbers can be checked for quality before outreach.
+4. **Engage:** Teams send emails, follow up, and place calls from the platform.
+5. **Export & report:** Push contacts into external sequencers or review dashboards for success, failures, and pending work.
+
+Long-running tasks (large imports, bulk enrichment, scheduled email sends) run in the **background**, so users are not blocked waiting on every batch to finish. When enrichment is running, users can see **live progress updates** in the app instead of guessing whether the job is still working.
+
+---
+
+## Key Outcomes
+
+- **Less manual data cleanup:** Enrichment and verification happen inside the product.
+- **Faster outreach setup:** Contacts move from raw list to ready-to-contact with fewer handoffs.
+- **Better visibility:** Admins see what succeeded, what failed, and what is still queued.
+- **Scalable operations:** Built to handle large contact volumes across many clients.
+- **Fewer tool switches:** Import, enrich, communicate, export, and report in one flow.
+
+---
+
+## Technologies & Approaches We Used
+
+| Area | What we used | Why it matters |
+|------|----------------|----------------|
+| **Frontend** | React, Redux | Modern, interactive web app for contacts, enrichment, reports, and calling |
+| **Backend** | Node.js, Express | Flexible API layer for business logic and integrations |
+| **Database** | MySQL with Sequelize | Reliable storage for contacts, clients, enrichment logs, and email history |
+| **Background jobs** | BullMQ + Redis | Handles large batches (enrichment, imports, retries) without slowing the app |
+| **Real-time updates** | Socket.IO | Shows enrichment and messaging progress as it happens |
+| **Email delivery** | Gmail, SendGrid, AWS SES, Brevo | Multiple sending options depending on client setup |
+| **AI content** | OpenAI | Helps generate personalized outreach emails at scale |
+| **Telephony** | Twilio | In-app calling and SMS |
+| **Monitoring** | Datadog | Tracks errors and enrichment activity in production |
+| **Deployment** | AWS (EC2), PM2 | Runs API and email services reliably in the cloud |
+
+**Approach in practice:** We designed SmashDeck as a **modular system:** a main web app, a separate email service, and queue workers so heavy work (enrichment, sending, imports) does not block everyday user actions. We also built **detailed status tracking** on every contact (email found, phone pending, exported, failed, etc.) so teams always know where a record stands.
+
+---
+
+## Who It's For
+
+- B2B sales and growth teams
+- Agencies managing outreach for multiple clients
+- Operations admins who run imports, enrichment, and reporting
+- Managers who need clear visibility into pipeline activity and performance
+
+---
