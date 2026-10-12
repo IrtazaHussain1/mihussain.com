@@ -11,8 +11,8 @@
 export interface Testimonial {
 	id: string;
 	quote: string;
-	name: string;
-	role: string;
+	name?: string;
+	role?: string;
 	company: string;
 	projectTag: string;
 	linkedinUrl?: string;
@@ -37,41 +37,41 @@ export const TESTIMONIALS: Testimonial[] = [
 		id: "scrapeops-scraping",
 		quote:
 			"Irtaza picked up our scraping work fast and didn't need hand-holding. When sites changed or proxies started failing, he usually had a fix in before we'd even raised it. Solid engineer, easy to work with.",
-		name: "[CLIENT NAME]",
-		role: "[ROLE]",
+		// name: "Joe K.",
+		// role: "Founder & CTO",
 		company: "ScrapeOps",
 		projectTag: "Web scraping & proxy infrastructure",
-		approved: false,
+		approved: true,
 	},
 	{
 		id: "jumpermedia-n8n",
 		quote:
 			"We came to Irtaza with a bunch of manual work our team was doing every day. He turned it into n8n workflows that just run, and set up monitoring so we know when something breaks. Saved us a lot of hours.",
-		name: "[CLIENT NAME]",
-		role: "[ROLE]",
+		// name: "[CLIENT NAME]",
+		// role: "[ROLE]",
 		company: "Jumpermedia",
 		projectTag: "n8n Automation Suite",
-		approved: false,
+		approved: true,
 	},
 	{
 		id: "saleshoney-backend",
 		quote:
 			"Irtaza is the kind of engineer you can give a vague problem to and get back something clean and working. He asks the right questions up front and the code still holds up months later.",
-		name: "[CLIENT NAME]",
-		role: "[ROLE]",
+		// name: "[CLIENT NAME]",
+		// role: "[ROLE]",
 		company: "Saleshoney",
 		projectTag: "Backend & automation engineering",
-		approved: false,
+		approved: true,
 	},
 	{
 		id: "adspower-automation",
 		quote:
 			"We needed browser automation that could run at scale without falling over. Irtaza built an API around AdsPower with geo-matched proxies and central state management, and it's been reliable since launch.",
-		name: "[CLIENT NAME]",
-		role: "[ROLE]",
-		company: "[CLIENT COMPANY]",
+		// name: "[CLIENT NAME]",
+		// role: "[ROLE]",
+		company: "JumperMedia",
 		projectTag: "AdsPower Login Automation",
-		approved: false,
+		approved: true,
 	},
 ];
 
@@ -80,8 +80,8 @@ const PLACEHOLDER = /\[[^\]]+\]/;
 function isRenderable(t: Testimonial): boolean {
 	if (!t.approved) return false;
 	if (!(t.projectTag in PROJECT_TAGS)) return false;
-	return ![t.quote, t.name, t.role, t.company].some((v) =>
-		PLACEHOLDER.test(v),
+	return ![t.quote, t.name, t.role, t.company].some(
+		(v) => typeof v === "string" && PLACEHOLDER.test(v),
 	);
 }
 
