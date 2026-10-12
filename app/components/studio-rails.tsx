@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AVAILABILITY_TEXT } from "@/lib/site";
 
 /** Formats current local time as HH:MM for the bottom rail. */
 function formatTime(): string {
@@ -31,7 +32,7 @@ export function StudioRails() {
 					<span>LAT 33.6° N · LON 73.0° E</span>
 					<span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
 						<i className="dot blink" />
-						AVAILABLE / JUN &apos;26
+						{AVAILABILITY_TEXT}
 					</span>
 				</span>
 			</div>

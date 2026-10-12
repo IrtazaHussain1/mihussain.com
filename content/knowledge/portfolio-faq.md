@@ -60,7 +60,7 @@ XProxy Tester is continuous proxy health monitoring for the XProxy fleet: uptime
 
 ## Is Irtaza available for new projects?
 
-Availability varies. Use the contact page on irtazahussain.com to describe your project, timeline, and stack. Response times depend on current engagements.
+Yes. Irtaza is taking new projects now. Use the contact page on irtazahussain.com to describe your project, timeline, and stack.
 
 ## Where is Irtaza based?
 

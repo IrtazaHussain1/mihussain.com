@@ -1,16 +1,43 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { LiveStatus } from "./components/live-status";
 import { FooterPrompt } from "./components/footer-prompt";
 import { FeaturedProjectCard } from "./components/featured-project-card";
+import { Testimonials } from "./components/testimonials";
 import { ArrowR } from "./components/arrow-r";
 import { getAllProjects } from "@/lib/mdx";
+import {
+	buildPageMetadata,
+	DEFAULT_DESCRIPTION,
+	SITE_NAME,
+} from "@/lib/seo/metadata";
+import { UPWORK_CONSULTATION_URL } from "@/lib/site";
+
+const HOME_TITLE = `${SITE_NAME} | Web Scraping Developer & Data Pipeline Engineer`;
+
+const base = buildPageMetadata({
+	title: HOME_TITLE,
+	description: DEFAULT_DESCRIPTION,
+	path: "/",
+});
+
+export const metadata: Metadata = {
+	...base,
+	// Absolute so the layout's "%s | Irtaza Hussain" template isn't applied twice.
+	title: { absolute: HOME_TITLE },
+	openGraph: { ...base.openGraph, title: HOME_TITLE },
+	twitter: { ...base.twitter, title: HOME_TITLE },
+};
 
 const DISCIPLINES = [
-	["Backend & systems", "APIs · data · reliability"],
-	["Full-stack", "TypeScript · React · Next.js"],
-	["Automation", "Pipelines · integrations"],
-	["Cloud & delivery", "AWS · Docker · CI"],
+	["Web scraping", "Scrapers · proxies · scheduled runs"],
+	["Data pipelines", "Postgres · Sheets · APIs · alerts"],
+	["Automation", "Browser automation · n8n · AI"],
+	["SaaS & CMS", "Node · React · Postgres"],
 ] as const;
+
+/** The consultation link is a placeholder until a real URL is set in lib/site.ts. */
+const consultationIsSet = UPWORK_CONSULTATION_URL.startsWith("http");
 
 export default function Home() {
 	const all = getAllProjects();
@@ -25,35 +52,47 @@ export default function Home() {
 					<h1
 						className="display mb-6"
 						style={{
-							fontSize: "clamp(64px, 10.8vw, 168px)",
+							fontSize: "clamp(48px, 7.4vw, 120px)",
 							margin: 0,
 						}}
 					>
-						Software, <em>built</em>
-						<br />
-						the long way.
+						I build data pipelines and automation that{" "}
+						<em>keep running</em>.
 					</h1>
 
 					<p
-						className="mb-8 max-w-[640px] text-[19px] leading-relaxed tracking-tight"
+						className="mb-8 mt-6 max-w-[640px] text-[19px] leading-relaxed tracking-tight"
 						style={{ color: "var(--fg-mute)" }}
 					>
-						I&apos;m a senior software engineer who builds products and
-						platforms with founders and engineering teams.{" "}
-						<span style={{ color: "var(--fg)" }}>
-							I care about clear architecture, maintainable code, and work
-							that still runs after launch.
-						</span>
+						Web scraping at scale, proxy infrastructure, browser automation,
+						and the dashboards and SaaS around them.
 					</p>
 
-					<div className="mb-10 flex flex-wrap gap-3">
+					<div className="mb-6 flex flex-wrap gap-3">
 						<Link href="/contact" className="btn primary">
 							Start a project <ArrowR />
 						</Link>
-						<Link href="/projects" className="btn">
-							See recent work
-						</Link>
+						<a
+							href={consultationIsSet ? UPWORK_CONSULTATION_URL : "/contact"}
+							className="btn"
+							{...(consultationIsSet
+								? { target: "_blank", rel: "noopener noreferrer" }
+								: {})}
+						>
+							Book a consultation
+						</a>
 					</div>
+
+					<p className="mb-10 text-[14px]" style={{ color: "var(--fg-mute)" }}>
+						Need a scraper or data feed?{" "}
+						<Link
+							href="/services/scraping"
+							className="underline underline-offset-4"
+							style={{ color: "var(--fg)" }}
+						>
+							See scraping &amp; data pipelines
+						</Link>
+					</p>
 
 					<LiveStatus />
 				</div>
@@ -61,10 +100,10 @@ export default function Home() {
 				<aside className="flex flex-col justify-end gap-7 border-[color:var(--line-soft)] md:border-l md:pl-8">
 					{(
 						[
-							["Role", "Software Engineer"],
-							["Based", "Lahore · remote worldwide"],
-							["Focus", "Backend · full-stack · cloud"],
-							["Links", "Projects · Contact"],
+							["Role", "Senior Software Engineer"],
+							["Based", "Lahore (UTC+5) · clients worldwide"],
+							["Focus", "Scraping · pipelines · automation"],
+							["Also", "n8n & AI · SaaS builds · CMS"],
 						] as const
 					).map(([k, v]) => (
 						<div
@@ -137,6 +176,8 @@ export default function Home() {
 					</div>
 				)}
 			</section>
+
+			<Testimonials />
 
 			<FooterPrompt />
 		</div>

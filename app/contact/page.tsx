@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactForm } from "./contact-form";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { AVAILABILITY_TEXT } from "@/lib/site";
 
 export const metadata: Metadata = buildPageMetadata({
 	title: "Contact",
@@ -87,7 +88,7 @@ export default function ContactPage() {
 					<div className="mt-12">
 						<div className="chip" style={{ background: "var(--bg-elev)" }}>
 							<i className="dot-sm" />
-							Open for new work · from June 2026
+							{AVAILABILITY_TEXT}
 						</div>
 					</div>
 				</div>

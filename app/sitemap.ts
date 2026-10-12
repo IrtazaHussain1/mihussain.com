@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllProjects } from "@/lib/mdx";
 import { SITE_URL } from "@/lib/seo/metadata";
+import { getApprovedTestimonials } from "@/lib/testimonials";
 
 /** Dynamic sitemap for static routes and published projects. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -8,9 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		"",
 		"/about",
 		"/services",
+		"/services/scraping",
 		"/projects",
 		"/contact",
-		"/testimonials",
+		...(getApprovedTestimonials().length > 0 ? ["/testimonials"] : []),
 		"/faq",
 	].map((path) => ({
 		url: `${SITE_URL}${path}`,

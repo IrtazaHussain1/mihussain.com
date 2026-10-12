@@ -17,6 +17,7 @@ export async function GET() {
 		`- Home: ${SITE_URL}/`,
 		`- About: ${SITE_URL}/about`,
 		`- Services: ${SITE_URL}/services`,
+		`- Scraping & data pipelines: ${SITE_URL}/services/scraping`,
 		`- Projects: ${SITE_URL}/projects`,
 		`- FAQ: ${SITE_URL}/faq`,
 		`- Contact: ${SITE_URL}/contact`,

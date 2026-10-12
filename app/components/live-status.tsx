@@ -4,24 +4,20 @@ import { useEffect, useMemo, useState } from "react";
 
 const LINES = [
 	{
-		tag: "BUILD",
-		text: "inference-gateway · main → green · 4.2s · 198 tests",
+		tag: "OPEN",
+		text: "taking new projects now · scraping / pipelines / automation",
 	},
 	{
-		tag: "DEPLOY",
-		text: "sensor-mesh edge fleet · 412 nodes · drift 0.02%",
+		tag: "SCRAPING",
+		text: "proxy rotation · scheduled runs · monitoring and alerts",
 	},
 	{
-		tag: "COMMIT",
-		text: "operator-console · feat: realtime tail · +186 −24",
+		tag: "AUTOMATION",
+		text: "browser automation · n8n workflows · AI document analysis",
 	},
 	{
-		tag: "REVIEW",
-		text: "orderkit/v3 RFC: 6 comments resolved, shipping",
-	},
-	{
-		tag: "NOTE",
-		text: "open for new work Q3 · backend / ai / automation",
+		tag: "SAAS",
+		text: "node · react · postgres · dashboards around your data",
 	},
 ] as const;
 

@@ -1,98 +1,61 @@
 ---
 title: AdsPower Login Automation
-description: Production API for large-scale browser login automation using AdsPower profiles, geo-aligned proxies, and centralized state in Xano.
+description: "Case study: a large-scale browser automation API built on AdsPower, with geo-aligned proxies and centralized state management."
+summary: "Case study: a production browser automation API that runs logins at scale on AdsPower profiles, pairs each session with a proxy in the right location, and keeps all state in one central store."
 date: "2025-03-01"
 image: /projects/google-adspower-login.png
 published: true
-skills: Python|Flask|Selenium|AdsPower|Xano|APScheduler|Grafana|Docker|Gunicorn|Pydantic|CAPTCHA APIs
+domain: Browser automation
+keywords: [browser automation, AdsPower, proxy infrastructure, Selenium, Python]
+skills: Python|Flask|Selenium|AdsPower|Xano|APScheduler|Grafana|Docker|Gunicorn|Pydantic
 ---
-## What It Is
+## Problem
 
-This system is a **production Flask API** for **Google account login automation at scale**. It orchestrates **AdsPower** anti-detect browser profiles, **location-aligned proxies**, and **Xano** as the system of record running single and batch logins, tracking step-level attempt logs, validating signed-out sessions, and collecting browser cookies through configured post-login browsing flows.
+The client needed to run browser logins across a large pool of accounts, and doing it by hand or with one-off scripts didn't scale:
 
-The architecture treats browser farms as an **operations platform**: parallel workers, profile reuse, evidence capture, and Grafana-backed visibility not one-off scripts.
-
----
-
-## The Problem We Solved
-
-Managing thousands of browser-backed accounts manually does not scale:
-
-- Each account needs an isolated fingerprint (AdsPower profile) and a consistent proxy strategy
-- Login flows fail in many ways (CAPTCHA, challenges, terms, recovery) and need structured retry metadata
-- Operators lack a single API to run batches, inspect runs, and see which step failed
-- Session drift (signed-out Gmail) wastes profiles until detected and reclaimed
-- Cookie state after login must be harvested and stored for downstream tools
-
-**The service centralizes login orchestration, persistence, and maintenance** so engineering and operations share one control plane.
+- Every account needed its own isolated browser profile and a proxy in a matching location.
+- Logins failed in many different ways, and nobody could easily see which step broke or why.
+- There was no single place to start a batch, check its progress, or look back at past runs.
+- State was spread across tools, so sessions that had quietly signed out went unnoticed.
 
 ---
 
-## What We Work On
+## Approach
 
-### Login automation
-**Single and batch login** endpoints, parallel workers (`MAX_PARALLEL_ACCOUNTS`), and step-level **account_login_attempts** with run-level aggregates.
+I built a production API that sits on top of AdsPower and treats the browser fleet as something you operate, not a pile of scripts.
 
-### Profile & proxy management
-AdsPower **profile lifecycle**, proxy assignment with **geo alignment**, fallback modes, and profile cleanup APIs.
+1. **One API for every run.** Single logins and batches go through the same endpoints, with parallel workers so large batches finish in reasonable time.
+2. **Geo-aligned proxies.** Each account is paired with an AdsPower profile and a proxy in the account's location, with fallbacks when a proxy isn't available.
+3. **Central state.** Accounts, profiles, proxies, runs and every step of every attempt are stored in one place, so failures can be traced without replaying a session by hand.
+4. **Scheduled upkeep.** Background jobs check whether sessions are still signed in, reopen them with backoff, and free up resources that are no longer in use.
+5. **Visibility.** API docs for operators, step-level logs and Grafana dashboards so problems show up before someone has to ask.
 
-### Session maintenance
-**Signed-out detection**, scheduled validity checks, session reopen with backoff, and resource reclamation.
-
-### Cookie farming
-Post-login **top-sites browsing** and CDP cookie capture persisted to Xano for accounts that completed successfully.
-
-### Resilience & safety
-**CAPTCHA** integrations (2Captcha, Anti-Captcha, CapMonster), recovery and terms handlers, **evidence screenshots**, and account ban/unban controls.
-
-### Observability & ops
-**Flasgger** API docs, **Grafana** dashboards (Xano/Infinity and optional MySQL sources), **APScheduler** crons, and Docker/PM2 deployment patterns.
+The layers are kept separate: Python handles orchestration, AdsPower handles browser isolation, and Xano holds durable state. Each one can scale on its own.
 
 ---
 
-## How It Works (In Simple Terms)
+## Stack
 
-1. **Configure:** Accounts, proxies, and AdsPower profiles are registered in Xano.
-2. **Assign:** The service picks or creates a profile and aligns a proxy to the account’s location.
-3. **Automate:** Selenium drives the browser inside AdsPower for Google sign-in and verification steps.
-4. **Record:** Each step and run is logged; failures store challenge and cooldown metadata.
-5. **Maintain:** Cron jobs check session/cookie validity, reopen sessions, and run cookie-farming flows.
-
-The API is the **orchestration layer**; AdsPower owns browser isolation and Xano owns durable state.
-
----
-
-## Key Outcomes
-
-- **Scalable throughput:** Parallel login workers across a large account pool.
-- **Fingerprint isolation:** Per-account AdsPower profiles instead of shared browser state.
-- **Operational visibility:** Step logs, run metrics, and Grafana views for incidents.
-- **Automated hygiene:** Signed-out checks and cookie-farming pipelines reduce manual rework.
-- **Production hardening:** Evidence capture, ban controls, and documented runbooks for operators.
+| Area | What I used |
+|------|-------------|
+| **API** | Python, Flask, Gunicorn, Flasgger (Swagger docs) |
+| **Browser automation** | Selenium 4, AdsPower local API |
+| **State** | Xano as the central store for accounts, proxies, runs and attempts |
+| **Scheduling** | APScheduler for session checks and maintenance jobs |
+| **Config** | Pydantic, python-dotenv |
+| **Monitoring** | Grafana dashboards |
+| **Deploy** | Docker, Docker Compose, PM2 |
 
 ---
 
-## Technologies & Approaches We Used
+## Result
 
-| Area | What we used | Why it matters |
-|------|----------------|----------------|
-| **API** | Flask, Gunicorn, Flasgger | REST control plane with Swagger for operators |
-| **Automation** | Selenium 4, AdsPower local API | Real browser flows with anti-detect profiles |
-| **Data** | Xano REST repositories | Central SoT for accounts, runs, proxies, cookies |
-| **Scheduling** | APScheduler | Session validity, cookie checks, maintenance crons |
-| **Validation** | Pydantic, python-dotenv | Typed config and safer deployments |
-| **CAPTCHA** | 2Captcha, Anti-Captcha, CapMonster | Automated recovery on challenge steps |
-| **Monitoring** | Grafana, Docker Compose | Dashboards and local ops stack |
-| **Deploy** | PM2, Make | Repeatable prod/dev process management |
+- **Concurrent sessions:** [METRIC: concurrent sessions]
+- **Login success rate:** [METRIC: success rate]
+- **Uptime since launch:** [METRIC: uptime since launch]
 
-**Approach in practice:** We kept **orchestration in Python**, **state in Xano**, and **browsers in AdsPower** so each layer can scale independently. Parallelism, geo-matched proxies, and structured attempt logs make failures diagnosable without replaying full manual sessions.
+Operators run batches, see exactly which step failed, and get signed-out sessions picked up automatically instead of finding them by hand.
 
 ---
 
-## Who It's For
-
-- Internal platform teams managing large browser-account fleets
-- Operators running batch logins, session checks, and cookie collection
-- Engineers integrating anti-detect automation with a centralized data backend
-
----
+Need browser automation or scraping that runs at scale? See [scraping & data pipelines](/services/scraping) or [start a project](/contact).

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://irtazahussain.com";
 export const SITE_NAME = "Irtaza Hussain";
 export const DEFAULT_DESCRIPTION =
-	"Senior software engineer building products and platforms: backend, full-stack, cloud, and AI integration.";
+	"Web scraping developer and data pipeline engineer in Lahore, working worldwide. Scrapers, proxy infrastructure, browser automation and the SaaS around them.";
 
 interface PageMetadataInput {
 	title: string;

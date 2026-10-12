@@ -16,6 +16,7 @@ export const metadata: Metadata = buildPageMetadata({
 const SERVICES = [
 	{
 		n: "01",
+		id: "backend-systems",
 		t: "Backend & systems engineering",
 		blurb:
 			"I design and build APIs, data models, and background work that stay reliable when traffic and scope grow.",
@@ -30,6 +31,7 @@ const SERVICES = [
 	},
 	{
 		n: "02",
+		id: "ai-integration",
 		t: "AI tooling & integration",
 		blurb:
 			"I treat LLM features as product engineering: retrieval, evals, cost control, and behavior you can explain to stakeholders.",
@@ -44,6 +46,7 @@ const SERVICES = [
 	},
 	{
 		n: "03",
+		id: "full-stack",
 		t: "Full-stack product delivery",
 		blurb:
 			"I ship coherent slices from database to UI: one person who can own the vertical and communicate tradeoffs clearly.",
@@ -58,6 +61,7 @@ const SERVICES = [
 	},
 	{
 		n: "04",
+		id: "automation-pipelines",
 		t: "Automation & data pipelines",
 		blurb:
 			"I replace brittle scripts with workflows you can see, replay, and fix when something fails at night.",
@@ -72,6 +76,8 @@ const SERVICES = [
 	},
 	{
 		n: "05",
+		id: "web-scraping",
+		more: "/services/scraping",
 		t: "Web scraping & platform work",
 		blurb:
 			"I build and extend scraping infrastructure: proxies, parsers, monitoring, and the unglamorous middleware around them.",
@@ -86,6 +92,7 @@ const SERVICES = [
 	},
 	{
 		n: "06",
+		id: "advisory",
 		t: "Technical advisory",
 		blurb:
 			"Short, direct engagements when you need an experienced second opinion before committing to a build or hire.",
@@ -140,7 +147,8 @@ export default function ServicesPage() {
 				{SERVICES.map((s) => (
 					<article
 						key={s.n}
-						className="grid grid-cols-1 gap-8 border-b py-10 lg:grid-cols-[80px_1.2fr_1.3fr] lg:gap-10"
+						id={s.id}
+						className="scroll-mt-24 grid grid-cols-1 gap-8 border-b py-10 lg:grid-cols-[80px_1.2fr_1.3fr] lg:gap-10"
 						style={{ borderColor: "var(--line)" }}
 					>
 						<span
@@ -166,12 +174,22 @@ export default function ServicesPage() {
 								GOOD FIT ·{" "}
 								<span style={{ color: "var(--fg-mute)" }}>{s.ideal}</span>
 							</div>
-							<Link
-								href="/contact"
-								className="btn mt-6 inline-flex !px-3 !py-2 !text-xs"
-							>
-								Enquire <ArrowR size={12} />
-							</Link>
+							<div className="mt-6 flex flex-wrap gap-2">
+								<Link
+									href="/contact"
+									className="btn inline-flex !px-3 !py-2 !text-xs"
+								>
+									Enquire <ArrowR size={12} />
+								</Link>
+								{"more" in s ? (
+									<Link
+										href={s.more}
+										className="btn inline-flex !px-3 !py-2 !text-xs"
+									>
+										Scraping &amp; data pipelines <ArrowR size={12} />
+									</Link>
+								) : null}
+							</div>
 						</div>
 						<div>
 							<div className="eyebrow mb-3">What this includes</div>
